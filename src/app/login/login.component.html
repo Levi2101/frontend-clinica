@@ -1,0 +1,20 @@
+<div class="login-container">
+    <div class="login-card">
+      <h2>Inicio de Sesion</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <input type="email" placeholder="Correo" formControlName="email" required />
+        </div>
+        <div class="input-group">
+          <input type="password" placeholder="Contraseña" formControlName="password" required />
+        </div>
+        <div class="options">
+          <label><input type="checkbox" /> Remember me</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid">Iniciar Sesion</button>
+      </form>
+      <p class="register-link">¿No tienes cuenta? <a routerLink="/registro">Registrate</a></p>
+    </div>
+  </div>
+  

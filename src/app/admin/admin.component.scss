@@ -1,0 +1,36 @@
+.admin-panel {
+    padding: 40px;
+  
+    h1 {
+      color: #231651;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+  
+      th, td {
+        color: #231651;
+        padding: 10px;
+        border: 1px solid #231651;
+        text-align: left;
+      }
+  
+      th {
+        background-color: #231651;
+        color: #d6fff6;
+      }
+  
+      button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+    }
+  }
+  

@@ -1,0 +1,23 @@
+<section class="servicios">
+    <h1>Servicios </h1>
+  
+    <!-- Descripción detallada del servicio seleccionado -->
+    <ng-container *ngIf="servicioSeleccionado; else listaServicios">
+      <h2>{{ servicios[servicioSeleccionado].titulo }}</h2>
+      <p>{{ servicios[servicioSeleccionado].descripcion }}</p>
+      <a routerLink="/servicios">← Volver a Servicios</a>
+    </ng-container>
+  
+    <!-- Lista general de servicios -->
+    <ng-template #listaServicios>
+      <ul class="servicios-lista">
+        <li><a routerLink="/servicios/urgencias">Tratamiento de lesiones deportivas</a></li>
+        <li><a routerLink="/servicios/quirurgica">Tratamiento de afecciones de espalda, rodilla, pie, y cadera </a></li>
+        <li><a routerLink="/servicios/terapia-intensiva">Tratamiento de lesiones de hombro y mano</a></li>
+        <li><a routerLink="/servicios/neonatologia">Programas de Rehabilitación en Casa</a></li>
+        <li><a routerLink="/servicios/hospitalizacion">Fisioestética</a></li>
+
+      </ul>
+    </ng-template>
+  </section>
+  

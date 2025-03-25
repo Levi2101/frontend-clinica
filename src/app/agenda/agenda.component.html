@@ -1,0 +1,24 @@
+<section class="agenda">
+  
+
+  <h1>Mis Citas</h1>
+  
+  <table *ngIf="citas.length > 0">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Servicio</th>
+        <th>Comentarios</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cita of citas">
+        <td>{{ cita.fecha }}</td>
+        <td>{{ cita.hora }}</td>
+        <td>{{ cita.servicio }}</td>
+        <td>{{ cita.comentarios }}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

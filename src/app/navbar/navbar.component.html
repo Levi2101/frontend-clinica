@@ -1,0 +1,43 @@
+<nav class="navbar">
+  <a routerLink="/home" class="logo">
+    <img src="assets/logo2.jpg" alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    <!-- VISIBLES PARA USUARIO AUTENTICADO CON ROL USUARIO -->
+    <ng-container *ngIf="auth.estaAutenticado() && auth.obtenerRol() === 'usuario'">
+      <li><a routerLink="/home">Inicio</a></li>
+      <li><a routerLink="/formulario">Formulario</a></li>
+      <li><a routerLink="/usuario">Mis Citas</a></li>
+
+      <li class="dropdown">
+        <a class="dropdown-toggle">Servicios</a>
+        <ul class="dropdown-menu">
+          <li><a routerLink="/servicios/urgencias">Urgencias</a></li>
+          <li><a routerLink="/servicios/quirurgica">Unidad Quirúrgica</a></li>
+          <li><a routerLink="/servicios/terapia-intensiva">Unidad de Terapia Intensiva</a></li>
+          <li><a routerLink="/servicios/neonatologia">Neonatología</a></li>
+          <li><a routerLink="/servicios/hospitalizacion">Hospitalización</a></li>
+          <li><a routerLink="/servicios/hemodinamia">Hemodinamia</a></li>
+          <li><a routerLink="/servicios/endoscopia">Endoscopia</a></li>
+        </ul>
+      </li>
+    </ng-container>
+
+    <!-- VISIBLES PARA ADMIN -->
+    <ng-container *ngIf="auth.estaAutenticado() && auth.obtenerRol() === 'admin'">
+      <li><a routerLink="/admin">Agenda</a></li>
+      <li><a routerLink="/formulario">Registrar Cita</a></li>
+    </ng-container>
+
+    <!-- SI NO ESTÁ LOGUEADO, MUESTRA SOLO ESTO -->
+    <ng-container *ngIf="!auth.estaAutenticado()">
+      <li><a routerLink="/home">Inicio</a></li>
+      <li><a routerLink="/servicios">Servicios</a></li>
+      <li><a routerLink="/login" class="login-btn">Iniciar sesión</a></li>
+    </ng-container>
+
+    <!-- SI ESTÁ LOGUEADO, MUESTRA BOTÓN DE CERRAR SESIÓN -->
+    <li *ngIf="auth.estaAutenticado()"><a (click)="cerrarSesion()">Cerrar sesión</a></li>
+  </ul>
+</nav>

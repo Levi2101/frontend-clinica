@@ -1,0 +1,12 @@
+<section class="registro">
+    <h2>Crear cuenta</h2>
+  
+    <form [formGroup]="registroForm" (ngSubmit)="registrar()">
+      <input type="email" formControlName="email" placeholder="Correo electrónico" />
+      <input type="password" formControlName="password" placeholder="Contraseña" />
+      <button type="submit" [disabled]="registroForm.invalid">Registrarse</button>
+    </form>
+  
+    <p *ngIf="mensaje">{{ mensaje }}</p>
+  </section>
+  

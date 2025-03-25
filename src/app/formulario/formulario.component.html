@@ -1,0 +1,21 @@
+<section class="usuario-panel">
+  
+
+  <h2>Agendar nueva cita</h2>
+
+  <form [formGroup]="citaForm" (ngSubmit)="agendarCita()">
+    <input formControlName="nombre" placeholder="Nombre completo" />
+    <input formControlName="email" placeholder="Correo electrónico" type="email" />
+    <input formControlName="telefono" placeholder="Teléfono" />
+    <input formControlName="fecha" type="date" />
+    <input formControlName="hora" type="time" />
+    <select formControlName="servicio">
+      <option value="">Selecciona un servicio</option>
+      <option value="Terapia física">Terapia física</option>
+      <option value="Rehabilitación postoperatoria">Rehabilitación postoperatoria</option>
+      <option value="Ejercicios terapéuticos">Ejercicios terapéuticos</option>
+    </select>
+    <textarea formControlName="comentarios" placeholder="Comentarios..."></textarea>
+    <button type="submit" [disabled]="citaForm.invalid">Agendar Cita</button>
+  </form>
+</section>
