@@ -14,6 +14,8 @@ import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angula
 export class FormularioComponent implements OnInit {
   citas: any[] = [];
   citaForm: FormGroup;
+  isLoading = false;
+
 
   constructor(
     private http: HttpClient,
@@ -39,7 +41,7 @@ export class FormularioComponent implements OnInit {
     const token = this.auth.obtenerToken();
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
-    this.http.get<any[]>('http://localhost:5000/api/mis-citas', { headers }).subscribe({
+    this.http.get<any[]>('https://backend-clinica-goay.onrender.com/api/mis-citas', { headers }).subscribe({
       next: (res) => this.citas = res,
       error: (err) => console.error('Error al obtener citas del usuario', err)
     });
@@ -50,12 +52,14 @@ export class FormularioComponent implements OnInit {
 
     const token = this.auth.obtenerToken();
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    this.isLoading = true; // Mostrar el modal de carga
 
-    this.http.post('http://localhost:5000/api/citas', this.citaForm.value, { headers }).subscribe({
+    this.http.post('https://backend-clinica-goay.onrender.com/api/citas', this.citaForm.value, { headers }).subscribe({
       next: () => {
         alert('Cita agendada exitosamente');
         this.citaForm.reset();
         this.obtenerMisCitas();
+        this.isLoading = false; // Ocultar el modal de carga
       },
       error: (err) => console.error('Error al agendar cita', err)
     });

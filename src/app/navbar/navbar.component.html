@@ -1,13 +1,18 @@
-<nav class="navbar">
+<nav class="navbar" [class.open]="menuAbierto">
   <a routerLink="/home" class="logo">
-    <img src="assets/logo2.jpg" alt="Logo">
+    <img src="assets/logo2.jpg" alt="Logo" />
   </a>
 
-  <ul class="nav-links">
-    <!-- VISIBLES PARA USUARIO AUTENTICADO CON ROL USUARIO -->
+  <!-- Botón hamburguesa para móviles -->
+  <div class="menu-toggle" (click)="menuAbierto = !menuAbierto">
+    ☰
+  </div>
+
+  <ul class="nav-links" [class.active]="menuAbierto">
+    <!-- USUARIO -->
     <ng-container *ngIf="auth.estaAutenticado() && auth.obtenerRol() === 'usuario'">
       <li><a routerLink="/home">Inicio</a></li>
-      <li><a routerLink="/formulario">Formulario</a></li>
+      <li><a routerLink="/formulario">Agendar</a></li>
       <li><a routerLink="/usuario">Mis Citas</a></li>
 
       <li class="dropdown">
@@ -24,20 +29,22 @@
       </li>
     </ng-container>
 
-    <!-- VISIBLES PARA ADMIN -->
+    <!-- ADMIN -->
     <ng-container *ngIf="auth.estaAutenticado() && auth.obtenerRol() === 'admin'">
       <li><a routerLink="/admin">Agenda</a></li>
       <li><a routerLink="/formulario">Registrar Cita</a></li>
     </ng-container>
 
-    <!-- SI NO ESTÁ LOGUEADO, MUESTRA SOLO ESTO -->
+    <!-- PÚBLICO -->
     <ng-container *ngIf="!auth.estaAutenticado()">
       <li><a routerLink="/home">Inicio</a></li>
       <li><a routerLink="/servicios">Servicios</a></li>
-      <li><a routerLink="/login" class="login-btn">Iniciar sesión</a></li>
+      <li><a routerLink="/login">Iniciar sesión</a></li>
     </ng-container>
 
-    <!-- SI ESTÁ LOGUEADO, MUESTRA BOTÓN DE CERRAR SESIÓN -->
-    <li *ngIf="auth.estaAutenticado()"><a (click)="cerrarSesion()">Cerrar sesión</a></li>
+    <!-- CERRAR SESIÓN -->
+    <li *ngIf="auth.estaAutenticado()">
+      <a (click)="cerrarSesion()" class="cerrar-sesion">Cerrar sesión</a>
+    </li>
   </ul>
 </nav>

@@ -1,21 +1,41 @@
 <section class="usuario-panel">
-  
-
   <h2>Agendar nueva cita</h2>
 
   <form [formGroup]="citaForm" (ngSubmit)="agendarCita()">
-    <input formControlName="nombre" placeholder="Nombre completo" />
-    <input formControlName="email" placeholder="Correo electrónico" type="email" />
-    <input formControlName="telefono" placeholder="Teléfono" />
-    <input formControlName="fecha" type="date" />
-    <input formControlName="hora" type="time" />
-    <select formControlName="servicio">
+    <label for="nombre">Nombre completo</label>
+    <input id="nombre" formControlName="nombre" placeholder="Nombre completo" />
+
+    <label for="email">Correo electrónico</label>
+    <input id="email" formControlName="email" type="email" placeholder="Correo electrónico" />
+
+    <label for="telefono">Teléfono</label>
+    <input id="telefono" formControlName="telefono" type="tel" placeholder="Teléfono" pattern="[0-9]*"
+      inputmode="numeric" />
+
+    <label for="fecha">Fecha</label>
+    <input id="fecha" formControlName="fecha" type="date" />
+
+    <label for="hora">Hora</label>
+    <input id="hora" formControlName="hora" type="time" />
+
+    <label for="servicio">Servicio</label>
+    <select id="servicio" formControlName="servicio">
       <option value="">Selecciona un servicio</option>
       <option value="Terapia física">Terapia física</option>
       <option value="Rehabilitación postoperatoria">Rehabilitación postoperatoria</option>
       <option value="Ejercicios terapéuticos">Ejercicios terapéuticos</option>
     </select>
-    <textarea formControlName="comentarios" placeholder="Comentarios..."></textarea>
+
+    <label for="comentarios">Comentarios</label>
+    <textarea id="comentarios" formControlName="comentarios" placeholder="Comentarios..."></textarea>
+
     <button type="submit" [disabled]="citaForm.invalid">Agendar Cita</button>
   </form>
 </section>
+<!-- Modal de Cargando -->
+<div *ngIf="isLoading" class="modal-cargando">
+  <div class="contenido-cargando">
+    <p>Agendando Cita...</p>
+    <div class="loader"></div>
+  </div>
+</div>

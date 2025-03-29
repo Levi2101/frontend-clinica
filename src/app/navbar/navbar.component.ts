@@ -12,12 +12,19 @@ import { Router } from '@angular/router';
   imports: [CommonModule, RouterModule] // <-- Asegúrate que esté CommonModule aquí
 })
 export class NavbarComponent {
+  menuAbierto = false;
+
 
 
   constructor(public auth: AuthService, private router: Router) {}
 
+
   cerrarSesion() {
     this.auth.cerrarSesion();
+    this.menuAbierto = false;
+
     this.router.navigate(['/login']);
   }
+
+
 }

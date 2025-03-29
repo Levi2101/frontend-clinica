@@ -17,6 +17,8 @@ imports: [CommonModule, ReactiveFormsModule, RouterModule]
 export class LoginComponent {
   loginForm: FormGroup;
   errorMsg: string = '';
+  isLoading = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +37,7 @@ export class LoginComponent {
 
     const loginData = this.loginForm.value;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    this.isLoading = true; // Mostrar el modal de carga
 
     this.http.post<any>('https://backend-clinica-goay.onrender.com/api/login', loginData, { headers }).subscribe({
       next: (res) => {
@@ -53,10 +56,17 @@ export class LoginComponent {
         } else {
           this.router.navigate(['/usuario']);
         }
+        this.isLoading = false; // Ocultar el modal de carga
       },
       error: (err) => {
-        this.errorMsg = 'Credenciales inválidas';
-        console.error(err);
+        if (err.status === 401) {
+          this.errorMsg = 'Contraseña incorrecta. Inténtalo de nuevo.';
+        } else if (err.status === 404) {
+          this.errorMsg = 'Correo no encontrado. Regístrate primero.';
+        } else {
+          this.errorMsg = 'Error en el servidor. Intenta más tarde.';
+        }
+        this.isLoading = false; // Oculta el loader
       }
     });
   }

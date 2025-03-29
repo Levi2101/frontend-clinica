@@ -30,8 +30,8 @@ export class RegistroComponent {
     private snackBar: MatSnackBar
   ) {
     this.registroForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      /*email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]*/
     });
   }
 
@@ -44,7 +44,7 @@ export class RegistroComponent {
       rol: 'usuario' // opcional, por si el backend ya lo asigna
     };
 
-    this.http.post('http://localhost:5000/api/register', datos).subscribe({
+    this.http.post('http://127.0.0.1:10000/api/register', datos).subscribe({
       next: () => {
         this.loginDespuesDeRegistrar(datos.email, datos.password);
       },
@@ -58,7 +58,7 @@ export class RegistroComponent {
     const loginData = { email, password };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    this.http.post<any>('http://localhost:5000/api/login', loginData, { headers }).subscribe({
+    this.http.post<any>('http://127.0.0.1:10000/api/login', loginData, { headers }).subscribe({
       next: (res) => {
         const token = res.token;
         const payload = JSON.parse(atob(token.split('.')[1]));
@@ -78,7 +78,7 @@ export class RegistroComponent {
         if (rol === 'admin') {
           this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/usuario']);
+          this.router.navigate(['/home']);
         }
       },
       error: () => {

@@ -39,7 +39,7 @@ export class UsuarioComponent implements OnInit {
     const token = this.auth.obtenerToken();
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
-    this.http.get<any[]>('http://localhost:5000/api/mis-citas', { headers }).subscribe({
+    this.http.get<any[]>('https://backend-clinica-goay.onrender.com/api/mis-citas', { headers }).subscribe({
       next: (res) => this.citas = res,
       error: (err) => console.error('Error al obtener citas del usuario', err)
     });
@@ -51,7 +51,7 @@ export class UsuarioComponent implements OnInit {
     const token = this.auth.obtenerToken();
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
-    this.http.post('http://localhost:5000/api/citas', this.citaForm.value, { headers }).subscribe({
+    this.http.post('https://backend-clinica-goay.onrender.com/api/citas', this.citaForm.value, { headers }).subscribe({
       next: () => {
         alert('Cita agendada exitosamente');
         this.citaForm.reset();

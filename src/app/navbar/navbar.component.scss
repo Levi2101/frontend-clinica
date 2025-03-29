@@ -5,13 +5,20 @@
   padding: 0.7rem 2rem;
   background-color: #231651;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap;
 
   .logo img {
     height: 60px;
-    width: 150px; // Aumenta este valor según el tamaño que desees
+    width: 150px;
     object-fit: contain;
   }
-  
+
+  .menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    color: #d6ffd6;
+    cursor: pointer;
+  }
 
   .nav-links {
     display: flex;
@@ -87,4 +94,53 @@
       color: #888;
     }
   }
+
+  // 💡 MEDIA QUERY RESPONSIVE
+  .menu-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      background-color: #231651;
+      position: absolute;
+      top: 80px;
+      right: 0;
+      width: 100%;
+      padding: 1rem 0;
+      z-index: 1000;
+
+      li {
+        padding: 1rem;
+        text-align: center;
+      }
+
+      &.active {
+        display: flex;
+      }
+    }
+
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+
+      &.open .nav-links {
+        display: flex;
+      }
+    }
+  }
+}
+
+.cerrar-sesion {
+  cursor: pointer;
 }
