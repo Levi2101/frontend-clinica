@@ -8,6 +8,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RegistroComponent } from './registro/registro.component';
 import { AgendaComponent } from './agenda/agenda.component';
+import { NosotrosComponent } from './nosotros/nosotros.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -20,5 +21,6 @@ export const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { rol: 'admin' } },
   { path: 'usuario', component: UsuarioComponent, canActivate: [AuthGuard], data: { rol: 'usuario' } },
   { path: 'registro', component: RegistroComponent },
-  {path: 'mi_cita', component:AgendaComponent}
+  { path: 'mi_cita', component:AgendaComponent},
+  { path: 'nosotros', component: NosotrosComponent}
 ];
