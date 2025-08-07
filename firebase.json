@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/clinica/browser",
+    "public": "dist/clinica",
     "ignore": [
       "firebase.json",
       "**/.*",

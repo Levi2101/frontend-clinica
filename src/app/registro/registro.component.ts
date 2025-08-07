@@ -30,18 +30,31 @@ export class RegistroComponent {
     private snackBar: MatSnackBar
   ) {
     this.registroForm = this.fb.group({
-      /*email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]*/
-    });
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
+      fechaNacimiento: ['', Validators.required],
+      sexo: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
+    }, { validators: this.validarPasswordIgual });
+  }
+
+  validarPasswordIgual(form: FormGroup) {
+    const pass = form.get('password')?.value;
+    const confirmPass = form.get('confirmPassword')?.value;
+    return pass === confirmPass ? null : { passwordMismatch: true };
   }
 
   registrar(): void {
     if (this.registroForm.invalid) return;
 
     const datos = {
+      nombre: this.registroForm.value.nombre,
+      fechaNacimiento: this.registroForm.value.fechaNacimiento,
+      sexo: this.registroForm.value.sexo,
       email: this.registroForm.value.email,
       password: this.registroForm.value.password,
-      rol: 'usuario' // opcional, por si el backend ya lo asigna
+      rol: 'usuario'
     };
 
     this.http.post('http://127.0.0.1:10000/api/register', datos).subscribe({
@@ -66,7 +79,6 @@ export class RegistroComponent {
 
         this.auth.guardarSesion(token, rol);
 
-        // ✅ SnackBar de bienvenida
         this.snackBar.open('¡Bienvenido a la clínica, ' + email + '!', 'Cerrar', {
           duration: 3000,
           horizontalPosition: 'center',
@@ -74,7 +86,6 @@ export class RegistroComponent {
           panelClass: ['snackbar-bienvenida']
         });
 
-        // ✅ Redirigir por rol
         if (rol === 'admin') {
           this.router.navigate(['/admin']);
         } else {
