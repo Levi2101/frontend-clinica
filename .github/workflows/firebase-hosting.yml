@@ -21,8 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - # En firebase-hosting.yml
       - name: Build Angular app
-        run: npm run build
+        run: npm ci && npm run build
+
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0.7.0
