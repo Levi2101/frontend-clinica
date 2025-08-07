@@ -57,7 +57,7 @@ export class RegistroComponent {
       rol: 'usuario'
     };
 
-    this.http.post('http://127.0.0.1:10000/api/register', datos).subscribe({
+    this.http.post('https://backend-clinica-goay.onrender.com/api/register', datos).subscribe({
       next: () => {
         this.loginDespuesDeRegistrar(datos.email, datos.password);
       },
@@ -71,7 +71,7 @@ export class RegistroComponent {
     const loginData = { email, password };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    this.http.post<any>('http://127.0.0.1:10000/api/login', loginData, { headers }).subscribe({
+    this.http.post<any>('https://backend-clinica-goay.onrender.com/api/login', loginData, { headers }).subscribe({
       next: (res) => {
         const token = res.token;
         const payload = JSON.parse(atob(token.split('.')[1]));
